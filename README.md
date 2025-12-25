@@ -3,16 +3,12 @@
 
 A simple library management web application built with React and Vite. This project provides a basic admin panel for managing books and a user-facing site for browsing and borrowing books.
 
-## Deployment
-
-Deployment link:- https://pr-library-management-system-react.vercel.app/
-
 ## Admin Login (Demo)
 
 Use these demo credentials for local testing or a demo instance only. Do NOT use these in production.
 
-- Email: soaib1002@gmail.com
-- Password: 1002
+- Email: admin@gmail.com
+- Password: admin123
 
 If your app stores credentials in a backend, update the seed/admin user there. If authentication is mocked in the frontend for demo, replace with secure backend auth before production.
 
@@ -53,6 +49,57 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Mock API (json-server)
+
+For local development you can use `json-server` to serve the included `db.json` file as a quick mock REST API.
+
+- Install locally (recommended for project scripts):
+
+```bash
+npm install --save-dev json-server
+```
+
+- Or run with `npx` without installing globally:
+
+```bash
+npx json-server --watch db.json --port 3001
+```
+
+- Recommended `package.json` script:
+
+```json
+"scripts": {
+	"mock": "json-server --watch db.json --port 3001"
+}
+```
+
+- The mock API will expose resource endpoints from `db.json` (for example `http://localhost:3001/books`).
+
+## HTTP client (axios)
+
+We use `axios` for making HTTP requests from the frontend.
+
+- Install `axios`:
+
+```bash
+npm install axios
+```
+
+- Simple example usage in a React component or hook:
+
+```javascript
+import axios from 'axios';
+
+async function fetchBooks() {
+	const res = await axios.get('http://localhost:3001/books');
+	return res.data;
+}
+
+export default fetchBooks;
+```
+
+When running locally with the mock API, start the mock server (`npm run mock`) and the dev server (`npm run dev`) in separate terminals.
 
 ## Project Structure (important files)
 

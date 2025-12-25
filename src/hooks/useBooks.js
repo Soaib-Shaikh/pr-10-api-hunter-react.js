@@ -17,7 +17,6 @@ export const useBooks = () => {
   const currentItem = list.slice(firstIndex, lastIndex)
   const totalPage = Math.ceil(list.length / itemsPerPage)
 
-  // ✅ GET BOOKS
   useEffect(() => {
     getBooks()
   }, [])
@@ -38,7 +37,6 @@ export const useBooks = () => {
     setBook(prev => ({ ...prev, [name]: value }))
   }
 
-  // ✅ ADD / UPDATE BOOK
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -57,20 +55,17 @@ export const useBooks = () => {
     navigate('/admin/view-books')
   }
 
-  // ✅ DELETE
   const handleDelete = async (id) => {
     await axios.delete(`${BOOK_URL}/${id}`)
     getBooks()
   }
 
-  // ✅ EDIT
   const handleEdit = (id) => {
     const editData = list.find(b => b.id === id)
     setBook(editData)
     navigate('/admin/add-book')
   }
 
-  // ✅ BORROW
   const handleBorrowBook = async (id) => {
     const user = JSON.parse(localStorage.getItem('user'))
     if (!user?.id) return alert('Login first')
@@ -92,7 +87,6 @@ export const useBooks = () => {
     getBooks()
   }
 
-  // ✅ RETURN
   const handleReturnBook = async (id) => {
     const user = JSON.parse(localStorage.getItem('user'))
     if (!user?.id) return
